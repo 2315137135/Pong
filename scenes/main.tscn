@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4fqdsl7tty6h"]
+
+[sub_resource type="GDScript" id="GDScript_asxkh"]
+script/source = "extends Node2D
+
+const BallScene = preload(\"res://src/ball.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var ball = BallScene.instantiate() 
+	ball.my_name
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_asxkh")
