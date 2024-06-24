@@ -1,42 +1,76 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4fqdsl7tty6h"]
+[gd_scene load_steps=8 format=3 uid="uid://b4fqdsl7tty6h"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_h1gdu"]
 [ext_resource type="Script" path="res://src/spawner/spawner.gd" id="1_w1jfr"]
 [ext_resource type="PackedScene" uid="uid://bjhbm8psbk75q" path="res://src/ball/ball.tscn" id="3_5vdw3"]
 [ext_resource type="PackedScene" uid="uid://dn56bap0t33cl" path="res://ui/score_ui.tscn" id="3_a87v0"]
-[ext_resource type="Script" path="res://src/game_mode/game_mode.gd" id="5_aiw7v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3k8a"]
+size = Vector2(50, 800)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qmuqe"]
+friction = 0.0
+rough = true
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xoe2d"]
+size = Vector2(800, 100)
 
 [node name="main" type="Node2D"]
+position = Vector2(400, 400)
 script = ExtResource("1_h1gdu")
 
-[node name="mark_player" type="Marker2D" parent="."]
-position = Vector2(-500, 0)
-
-[node name="mark_ai" type="Marker2D" parent="."]
-position = Vector2(500, 0)
-
-[node name="mark_ball" type="Marker2D" parent="."]
-
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BallSpawner" type="Marker2D" parent="."]
+script = ExtResource("1_w1jfr")
+template_scene = ExtResource("3_5vdw3")
 
 [node name="Layer" type="CanvasLayer" parent="."]
 
 [node name="score" parent="Layer" instance=ExtResource("3_a87v0")]
 unique_name_in_owner = true
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -397.0
-offset_top = 15.0
-offset_right = 397.0
-offset_bottom = 103.0
+offset_top = 0.0
+offset_bottom = 88.0
 
-[node name="Node" type="Node" parent="."]
+[node name="death_left" type="Area2D" parent="."]
+position = Vector2(-400, 0)
+metadata/_edit_group_ = true
 
-[node name="BallSpawner" type="Node" parent="Node" node_paths=PackedStringArray("target")]
-script = ExtResource("1_w1jfr")
-template_scene = ExtResource("3_5vdw3")
-target = NodePath("../../mark_ball")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death_left"]
+shape = SubResource("RectangleShape2D_t3k8a")
+debug_color = Color(0.98, 0, 0, 0.141176)
 
-[node name="GameMode" type="Node" parent="Node"]
-script = ExtResource("5_aiw7v")
+[node name="death_right" type="Area2D" parent="."]
+position = Vector2(400, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death_right"]
+shape = SubResource("RectangleShape2D_t3k8a")
+debug_color = Color(0.98, 0, 0, 0.141176)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_qmuqe")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_xoe2d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 400)
+shape = SubResource("RectangleShape2D_xoe2d")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-14, 18)
+rotation = 1.57079
+physics_material_override = SubResource("PhysicsMaterial_qmuqe")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_xoe2d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, 400)
+shape = SubResource("RectangleShape2D_xoe2d")

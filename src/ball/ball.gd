@@ -1,8 +1,11 @@
-extends Node2D
+extends RigidBody2D
 
 var dir = Vector2.from_angle(randf() * PI * 2)
-var speed = 100
+var speed = 400
 
 
-func _process(delta):
-	position += dir * speed * delta
+func _ready():
+	self.linear_velocity = dir * speed
+
+
+
