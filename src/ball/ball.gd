@@ -1,16 +1,8 @@
 extends Node2D
 
-@export() var speed = 300
-var velocity = Vector2.ZERO
-
-signal on_destory
+var dir = Vector2.from_angle(randf() * PI * 2)
+var speed = 100
 
 
-func _ready():
-	$Area2D.area_entered.connect(on_entered)
-	pass
-
-
-func on_entered(area):
-	if area.is_in_group("dead_zone"):
-		velocity = (global_position - area.global_position).normalized() * speed
+func _process(delta):
+	position += dir * speed * delta

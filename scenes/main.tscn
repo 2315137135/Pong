@@ -1,10 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4fqdsl7tty6h"]
+[gd_scene load_steps=5 format=3 uid="uid://b4fqdsl7tty6h"]
 
-[ext_resource type="PackedScene" uid="uid://bjhbm8psbk75q" path="res://src/ball/ball.tscn" id="1_u6p7o"]
-[ext_resource type="Script" path="res://src/ball_generate/ball_generate.gd" id="1_w1jfr"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_h1gdu"]
+[ext_resource type="Script" path="res://src/spawner/spawner.gd" id="1_w1jfr"]
+[ext_resource type="PackedScene" uid="uid://bjhbm8psbk75q" path="res://src/ball/ball.tscn" id="3_5vdw3"]
+[ext_resource type="PackedScene" uid="uid://dn56bap0t33cl" path="res://ui/score_ui.tscn" id="3_a87v0"]
 
-[node name="Node2D" type="Node2D"]
+[node name="main" type="Node2D"]
+script = ExtResource("1_h1gdu")
 
-[node name="ball_generate" type="Node" parent="."]
+[node name="ball_spawner" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_w1jfr")
-ball = ExtResource("1_u6p7o")
+template_scene = ExtResource("3_5vdw3")
+target = NodePath("../ball_start")
+
+[node name="Timer" type="Timer" parent="ball_spawner"]
+autostart = true
+
+[node name="player_start" type="Marker2D" parent="."]
+position = Vector2(-500, 0)
+
+[node name="ai_start" type="Marker2D" parent="."]
+position = Vector2(500, 0)
+
+[node name="ball_start" type="Marker2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ui_layer" type="CanvasLayer" parent="."]
+
+[node name="score" parent="ui_layer" instance=ExtResource("3_a87v0")]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -397.0
+offset_top = 15.0
+offset_right = 397.0
+offset_bottom = 103.0
+
+[connection signal="timeout" from="ball_spawner/Timer" to="ball_spawner" method="spawn"]
