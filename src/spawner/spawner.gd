@@ -6,7 +6,7 @@ extends Node
 
 @export() var target: Node2D = null
 
-@export var spawn_on_start = true
+@export var spawn_on_start = false
 
 
 func spawn():

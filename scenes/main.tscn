@@ -1,34 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4fqdsl7tty6h"]
+[gd_scene load_steps=6 format=3 uid="uid://b4fqdsl7tty6h"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_h1gdu"]
 [ext_resource type="Script" path="res://src/spawner/spawner.gd" id="1_w1jfr"]
 [ext_resource type="PackedScene" uid="uid://bjhbm8psbk75q" path="res://src/ball/ball.tscn" id="3_5vdw3"]
 [ext_resource type="PackedScene" uid="uid://dn56bap0t33cl" path="res://ui/score_ui.tscn" id="3_a87v0"]
+[ext_resource type="Script" path="res://src/game_mode/game_mode.gd" id="5_aiw7v"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_h1gdu")
 
-[node name="ball_spawner" type="Node" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("1_w1jfr")
-template_scene = ExtResource("3_5vdw3")
-target = NodePath("../ball_start")
-
-[node name="Timer" type="Timer" parent="ball_spawner"]
-autostart = true
-
-[node name="player_start" type="Marker2D" parent="."]
+[node name="mark_player" type="Marker2D" parent="."]
 position = Vector2(-500, 0)
 
-[node name="ai_start" type="Marker2D" parent="."]
+[node name="mark_ai" type="Marker2D" parent="."]
 position = Vector2(500, 0)
 
-[node name="ball_start" type="Marker2D" parent="."]
+[node name="mark_ball" type="Marker2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="ui_layer" type="CanvasLayer" parent="."]
+[node name="Layer" type="CanvasLayer" parent="."]
 
-[node name="score" parent="ui_layer" instance=ExtResource("3_a87v0")]
+[node name="score" parent="Layer" instance=ExtResource("3_a87v0")]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -38,4 +31,12 @@ offset_top = 15.0
 offset_right = 397.0
 offset_bottom = 103.0
 
-[connection signal="timeout" from="ball_spawner/Timer" to="ball_spawner" method="spawn"]
+[node name="Node" type="Node" parent="."]
+
+[node name="BallSpawner" type="Node" parent="Node" node_paths=PackedStringArray("target")]
+script = ExtResource("1_w1jfr")
+template_scene = ExtResource("3_5vdw3")
+target = NodePath("../../mark_ball")
+
+[node name="GameMode" type="Node" parent="Node"]
+script = ExtResource("5_aiw7v")

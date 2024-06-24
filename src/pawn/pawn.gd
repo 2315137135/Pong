@@ -1,11 +1,9 @@
 extends Node2D
 
-@export_range(20, 100, 10) var width = 50:
-	set(value):
-		%CollisionShape2D.scale.x = value
-		width = value
+var speed = 0
 
-@export_range(500,2000,50) var height = 500:
-	set(value):
-		%CollisionShape2D.scale.y = value
-		height = value
+
+func move(value, delta):
+	position.y += value * delta
+	position.y = clamp(position.y, 0, get_viewport_rect().size.y)
+	pass
