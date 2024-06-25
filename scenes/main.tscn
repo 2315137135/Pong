@@ -1,16 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4fqdsl7tty6h"]
+[gd_scene load_steps=11 format=3 uid="uid://b4fqdsl7tty6h"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_h1gdu"]
 [ext_resource type="Script" path="res://src/spawner/spawner.gd" id="1_w1jfr"]
 [ext_resource type="PackedScene" uid="uid://bjhbm8psbk75q" path="res://src/ball/ball.tscn" id="3_5vdw3"]
 [ext_resource type="PackedScene" uid="uid://dn56bap0t33cl" path="res://ui/score_ui.tscn" id="3_a87v0"]
+[ext_resource type="Script" path="res://src/death_area.gd" id="5_1encc"]
+[ext_resource type="PackedScene" uid="uid://diwwrh8e76byy" path="res://src/pawn/pawn.tscn" id="6_gfowa"]
+[ext_resource type="Script" path="res://src/player_control.gd" id="7_02t7o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3k8a"]
 size = Vector2(50, 800)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qmuqe"]
 friction = 0.0
-rough = true
 bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoe2d"]
@@ -34,7 +36,11 @@ offset_top = 0.0
 offset_bottom = 88.0
 
 [node name="death_left" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-400, 0)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("5_1encc")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="death_left"]
@@ -42,7 +48,11 @@ shape = SubResource("RectangleShape2D_t3k8a")
 debug_color = Color(0.98, 0, 0, 0.141176)
 
 [node name="death_right" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(400, 0)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("5_1encc")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="death_right"]
@@ -54,23 +64,20 @@ physics_material_override = SubResource("PhysicsMaterial_qmuqe")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -400)
+position = Vector2(0, -451)
 shape = SubResource("RectangleShape2D_xoe2d")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 400)
+position = Vector2(0, 450)
 shape = SubResource("RectangleShape2D_xoe2d")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-14, 18)
-rotation = 1.57079
-physics_material_override = SubResource("PhysicsMaterial_qmuqe")
-metadata/_edit_group_ = true
+[node name="Pawn" parent="." instance=ExtResource("6_gfowa")]
+position = Vector2(-373, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, -400)
-shape = SubResource("RectangleShape2D_xoe2d")
+[node name="PlayerControl" type="Node" parent="Pawn" node_paths=PackedStringArray("target")]
+script = ExtResource("7_02t7o")
+target = NodePath("..")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, 400)
-shape = SubResource("RectangleShape2D_xoe2d")
+[node name="Pawn2" parent="." instance=ExtResource("6_gfowa")]
+position = Vector2(368, 0)
+scale = Vector2(1, 6.56)

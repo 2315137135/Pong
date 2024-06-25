@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://diwwrh8e76byy"]
+[gd_scene load_steps=4 format=3 uid="uid://diwwrh8e76byy"]
+
+[ext_resource type="Texture2D" uid="uid://cshpbvuxwi2jk" path="res://assets/fall_back_tex.tres" id="1_rvh5n"]
 
 [sub_resource type="GDScript" id="GDScript_retod"]
 script/source = "extends Node2D
@@ -13,11 +15,17 @@ func move(value, delta):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vnrmd"]
-size = Vector2(50, 300)
+size = Vector2(18, 230)
 
 [node name="Pawn" type="CharacterBody2D"]
+collision_layer = 2
 motion_mode = 1
 script = SubResource("GDScript_retod")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vnrmd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.533333)
+scale = Vector2(18, 228)
+texture = ExtResource("1_rvh5n")

@@ -43,8 +43,16 @@ down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="static"
+2d_physics/layer_2="player"
+2d_physics/layer_3="ball"
+2d_physics/layer_4="death"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
