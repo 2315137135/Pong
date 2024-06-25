@@ -1,4 +1,7 @@
 extends Node
+##
+## 用于保存简单的游戏状态
+##
 
 @export() var _SAVE_PATH = "user://savegame.save"
 

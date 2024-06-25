@@ -1,4 +1,7 @@
 extends Node
+##
+## 全局事件总线
+##
 
 
 func on(event: String, callback):

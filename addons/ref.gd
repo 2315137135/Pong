@@ -1,5 +1,9 @@
 extends RefCounted
 class_name Ref
+##
+## 绑定变量
+##
+
 var _target: Node
 var _key: String
 signal changed(v)
