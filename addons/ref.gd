@@ -21,6 +21,7 @@ func _init(_value = null):
 	pass
 
 
+## 绑定变量到对象属性, 当ref更新时,对象属性也会更新
 func bind(target: Object, key: String):
 	_target = target
 	_key = key

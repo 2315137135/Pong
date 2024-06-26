@@ -12,11 +12,13 @@ func _ready():
 
 
 func _on_body_entered(body: Node):
+	EventBus.emit(EventName.BALL_COLLISON)
+
+	%CollisionSoundPlayer.play()
 	if body is CharacterBody2D:
 		var d = 1 if self.linear_velocity.x > 0 else -1
 		var t = abs(self.linear_velocity.x)
 		self.linear_velocity.x = clamp(t, min_speed, max_speed) * d
 		self.linear_velocity.y *= 0.8
 		self.apply_impulse(Vector2(0, body.velocity.y * 40))
-
 	pass  # Replace with function body.

@@ -13,5 +13,6 @@
     "hide-files.files": [
         ".godot",
         ".vscode"
-    ]
+    ],
+    "commentTranslate.hover.enabled": false
 }

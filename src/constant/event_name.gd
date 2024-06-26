@@ -3,6 +3,8 @@ extends Object
 
 class_name EventName
 enum {
-	## 球被销毁时
-	BALL_DEAD
+	##球被销毁时
+	BALL_DIE,
+	##球撞击时
+	BALL_COLLIDE,
 }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjhbm8psbk75q"]
+[gd_scene load_steps=7 format=3 uid="uid://bjhbm8psbk75q"]
 
 [ext_resource type="Script" path="res://src/ball/ball.gd" id="1_ffdr6"]
+[ext_resource type="AudioStream" uid="uid://bsb5fjc81emb3" path="res://assets/sounds/Collect_Point_02.mp3" id="2_6pn4r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u84d0"]
 friction = 0.0
@@ -34,5 +35,9 @@ texture = SubResource("GradientTexture2D_ytnfj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xe2h8")
+
+[node name="CollisionSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_6pn4r")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
