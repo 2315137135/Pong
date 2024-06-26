@@ -12,7 +12,6 @@ func _ready():
 
 
 func _on_body_entered(body: Node):
-	EventBus.emit(EventName.BALL_COLLISON)
 
 	%CollisionSoundPlayer.play()
 	if body is CharacterBody2D:
