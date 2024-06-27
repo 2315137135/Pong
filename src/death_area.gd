@@ -10,6 +10,5 @@ func _ready():
 func _on_body_entered(_body: Node):
 	if _body.is_in_group("can_death"):
 		deathable_entered.emit(_body)
-		print(_body.name)
 		_body.queue_free()
 	pass

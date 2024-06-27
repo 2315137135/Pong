@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4fqdsl7tty6h"]
+[gd_scene load_steps=12 format=3 uid="uid://b4fqdsl7tty6h"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_h1gdu"]
 [ext_resource type="Script" path="res://src/spawner/spawner.gd" id="1_w1jfr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/death_area.gd" id="5_1encc"]
 [ext_resource type="PackedScene" uid="uid://diwwrh8e76byy" path="res://src/pawn/pawn.tscn" id="6_gfowa"]
 [ext_resource type="Script" path="res://src/player_control.gd" id="7_02t7o"]
+[ext_resource type="Texture2D" uid="uid://cshpbvuxwi2jk" path="res://assets/fall_back_tex.tres" id="8_e5f63"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3k8a"]
 size = Vector2(50, 800)
@@ -81,3 +82,12 @@ target = NodePath("..")
 [node name="Pawn2" parent="." instance=ExtResource("6_gfowa")]
 position = Vector2(368, 0)
 scale = Vector2(1, 6.56)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.58, 1, 0.28, 1)
+position = Vector2(-9.09495e-13, -3)
+rotation = 1.57079
+scale = Vector2(-1688.46, 0.210171)
+texture = ExtResource("8_e5f63")
+region_enabled = true
+region_rect = Rect2(-62, -15.54, 555, 38)
